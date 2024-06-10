@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, render_template_string, redirect, url_for, send_file
-import openpyxl
-import qrcode
+import openpyxl  # openpyxl==3.0.9
+import qrcode  # qrcode==7.3 
 import io
 import socket
 
