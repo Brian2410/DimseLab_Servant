@@ -4,6 +4,7 @@ import openpyxl  # openpyxl==3.0.9
 import qrcode  # qrcode==7.3 
 import io
 import socket
+import PIL.Image
 
 app = Flask(__name__)
 
