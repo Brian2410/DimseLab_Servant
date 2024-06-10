@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, render_template_string, redirect, url_for, send_file
 import openpyxl
 import qrcode
@@ -5,6 +6,9 @@ import io
 import socket
 
 app = Flask(__name__)
+
+# Get the port from the PORT environment variable, defaulting to 10000 if not set
+port = int(os.environ.get("PORT", 10000))
 
 # Path to your Excel file
 EXCEL_FILE = 'inventory.xlsx'
@@ -80,4 +84,4 @@ def inventory():
     return redirect('https://brian2410.github.io/DimseLab_Servant/inventory.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(host='0.0.0.0', port=port)
