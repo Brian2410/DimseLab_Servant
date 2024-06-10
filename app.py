@@ -18,18 +18,9 @@ def load_inventory():
 def save_inventory(wb):
     wb.save(EXCEL_FILE)
 
-# Get the local IP address of the computer
-def get_local_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(('8.8.8.8', 80))
-    local_ip = s.getsockname()[0]
-    s.close()
-    return local_ip
-
 # Generate QR code
 def generate_qr_code(data):
-    ip_address = get_local_ip()
-    url = f'http://{ip_address}:5000' + data  # Concatenate the base URL with the data
+    url = f'https://brian2410.github.io/DimseLab_Servant/inventory.html?item={data}'
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
     qr.add_data(url)
     qr.make(fit=True)
@@ -39,7 +30,7 @@ def generate_qr_code(data):
 # Route to generate and display QR code
 @app.route('/generate_qr/<item_id>')
 def generate_qr(item_id):
-    img = generate_qr_code(f'/rent/{item_id}')
+    img = generate_qr_code(item_id)
     img_io = io.BytesIO()
     img.save(img_io, 'PNG')
     img_io.seek(0)
@@ -86,7 +77,7 @@ def rent(item_id):
 # Route to redirect to inventory HTML
 @app.route('/inventory')
 def inventory():
-    return redirect('https://raw.githubusercontent.com/Brian2410/DimseLab_Servant/main/inventory.html')
+    return redirect('https://brian2410.github.io/DimseLab_Servant/inventory.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

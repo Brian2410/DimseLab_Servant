@@ -30,22 +30,5 @@
     <ul id="inventory-list">
         <!-- Inventory items will be dynamically inserted here -->
     </ul>
-
-    <script>
-        // JavaScript code to fetch inventory data and populate the inventory list
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/api/inventory') // Assuming you have an API endpoint to fetch inventory data
-                .then(response => response.json())
-                .then(data => {
-                    const inventoryList = document.getElementById('inventory-list');
-                    data.forEach(item => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `${item.name} (${item.quantity})`;
-                        inventoryList.appendChild(listItem);
-                    });
-                })
-                .catch(error => console.error('Error fetching inventory data:', error));
-        });
-    </script>
 </body>
 </html>
