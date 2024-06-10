@@ -50,7 +50,7 @@ def generate_qr(item_id):
 def index():
     wb = load_inventory()
     sheet = wb.active
-    inventory = [(row[0], row[1], row[2]) for row in sheet.iter_rows(min_row=2, values_only=True)]
+    inventory = [(row[0].value, row[1].value, row[2].value) for row in sheet.iter_rows(min_row=2)]
     return render_template_string('''
         <h1>Inventory</h1>
         <ul>
@@ -58,6 +58,7 @@ def index():
             <li>{{ item_name }} ({{ quantity }}) - <a href="{{ url_for('generate_qr', item_id=item_id) }}">Generate QR</a></li>
             {% endfor %}
         </ul>
+        <a href="{{ url_for('inventory') }}">View Inventory HTML</a>
     ''', inventory=inventory)
 
 # Route to handle renting
@@ -81,6 +82,11 @@ def rent(item_id):
             <input type="submit" value="Rent">
         </form>
     '''
+
+# Route to redirect to inventory HTML
+@app.route('/inventory')
+def inventory():
+    return redirect('https://raw.githubusercontent.com/Brian2410/DimseLab_Servant/main/inventory.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
