@@ -25,7 +25,7 @@ def save_inventory(wb):
 
 # Generate QR code
 def generate_qr_code(data):
-    url = f'https://brian2410.github.io/DimseLab_Servant/inventory.html?item={data}'
+    url = f'https://dimselab-servant.onrender.com/inventory.html?item={data}'
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
     qr.add_data(url)
     qr.make(fit=True)
